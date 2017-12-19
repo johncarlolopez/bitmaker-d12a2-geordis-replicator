@@ -1,3 +1,4 @@
+require "pry"
 class Replicator
 
   # When the Enterprise calls Replicator.new, this method executes.
@@ -50,10 +51,10 @@ class Replicator
     # transported and @inside_replicator will contain the glass
     # in its contents.
     retrieve_glass
-
+    # binding.pry
     # Setup an instance variable to access the glass.
     @glass = @inside_replicator.contents.first
-
+    # binding.pry
     # Transport each ingredient the recipe calls for
     # from the pantry to the glass.
     # If this method is successful, it should return
@@ -65,7 +66,7 @@ class Replicator
     # And then to see what's inside the glass, use:
     #   glass_inside_replicator.inside.contents
     transport_ingredients_to_glass
-
+    # binding.pry
     # This methods mixes the ingredients in the glass around.
     # It returns nil, even if successful, but if you look at:
     #   glass_inside_replicator.inside.contents
@@ -93,6 +94,7 @@ class Replicator
       @enterprise.cupboard.shelf,
       @inside_replicator
     )
+    # binding.pry
   end
 
   def glass_inside_replicator
