@@ -1,3 +1,4 @@
+require "pry"
 class Replicator
 
   # When the Enterprise calls Replicator.new, this method executes.
@@ -52,6 +53,8 @@ class Replicator
     retrieve_glass
 
     # Setup an instance variable to access the glass.
+    # binding.pry
+
     @glass = @inside_replicator.contents.first
 
     # Transport each ingredient the recipe calls for
@@ -65,6 +68,7 @@ class Replicator
     # And then to see what's inside the glass, use:
     #   glass_inside_replicator.inside.contents
     transport_ingredients_to_glass
+    # binding.pry
 
     # This methods mixes the ingredients in the glass around.
     # It returns nil, even if successful, but if you look at:
@@ -72,11 +76,13 @@ class Replicator
     # then you may find the ingredients order has changed.
     # If it's successful, all the ingredients should still be in the glass.
     mix
-
+    # binding.pry
     # This method adjusts the temperature of the contents in the glass.
     # If you read back `glass.temperature`, then it should be set
     # to the temperature the recipe calls for if this method executed properly.
+    # binding.pry
     adjust_temperature
+    # binding.pry
 
     # This method moves the glass from @inside_replicator to @plate
     # so that the character can pick it up and drink it.
@@ -99,6 +105,7 @@ class Replicator
     # This reaches into the @inside_replicator location instance
     # and then into the `contents` of that instance, which is an array
     # and obtains the first element of that array.
+
     @inside_replicator.contents.first
   end
 
@@ -110,13 +117,17 @@ class Replicator
 
     # Go through recipe and transport each ingredient
     # from pantry to glass, one by one.
+    # binding.pry
     @recipe.ingredients.each do |ingredient_name|
       @enterprise.transporter.energize(
         @enterprise.pantry.find_ingredient(ingredient_name),
         @enterprise.pantry.shelf,
         glass_inside_replicator.inside
       )
+
     end
+    # binding.pry
+
   end
 
   # This mixes the ingredients around inside the replicator.
@@ -169,8 +180,9 @@ class Replicator
     # Transport glass from reactor back to inside the replicator.
     # If successful, @enterprise.reactor.core will now be empty
     # and @inside_replicator will once again contain the glass.
+    # binding.pry
     transport_glass_from_reactor
-
+    # binding.pry
   end
 
   def transport_glass_to_reactor
@@ -182,19 +194,25 @@ class Replicator
   end
 
   def transport_glass_from_reactor
+    # binding.pry
     @enterprise.transporter.energize(
       @glass,
+      # @enterprise.reactor.core.contents.first,
       @enterprise.reactor.core,
       @inside_replicator
+      # glass_inside_replicator
     )
+    # binding.pry
   end
 
   def transport_glass_to_replicator_plate
+    # binding.pry
     @enterprise.transporter.energize(
       glass_inside_replicator,
       @inside_replicator,
       @plate
     )
+
   end
 
 end
