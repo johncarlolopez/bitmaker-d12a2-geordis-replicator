@@ -1,3 +1,5 @@
+require "pry"
+# require "pry-nav"
 class Replicator
 
   # When the Enterprise calls Replicator.new, this method executes.
@@ -40,7 +42,7 @@ class Replicator
   # and then manually execute each method to ensure
   # it returns what's expect.
   def replicate(recipe)
-
+    # binding.pry
     # Setup an instance variable for the recipe
     # so that other methods can see what the recipe is
     @recipe = recipe
@@ -52,6 +54,7 @@ class Replicator
     retrieve_glass
 
     # Setup an instance variable to access the glass.
+    # binding.pry
     @glass = @inside_replicator.contents.first
 
     # Transport each ingredient the recipe calls for
@@ -76,6 +79,7 @@ class Replicator
     # This method adjusts the temperature of the contents in the glass.
     # If you read back `glass.temperature`, then it should be set
     # to the temperature the recipe calls for if this method executed properly.
+    # binding.pry
     adjust_temperature
 
     # This method moves the glass from @inside_replicator to @plate
@@ -83,6 +87,7 @@ class Replicator
     # If it's successful, glass_inside_replicator should be nil
     # and now @plate.contents should contain the glass at
     # the proper temperature and with the proper ingredients.
+    # binding.pry
     transport_glass_to_replicator_plate
   end
 
@@ -111,10 +116,20 @@ class Replicator
     # Go through recipe and transport each ingredient
     # from pantry to glass, one by one.
     @recipe.ingredients.each do |ingredient_name|
+
       @enterprise.transporter.energize(
         # Geordi is in a jokey mood and
         # reprograms the replicator
-        @enterprise.pantry.find_ingredient('banana'),
+        #replace banana with tea and sugar
+        @enterprise.pantry.find_ingredient('tea'),
+        @enterprise.pantry.shelf,
+        glass_inside_replicator.inside
+      )
+      @enterprise.transporter.energize(
+        # Geordi is in a jokey mood and
+        # reprograms the replicator
+        #replace banana with tea and sugar
+        @enterprise.pantry.find_ingredient('sugar'),
         @enterprise.pantry.shelf,
         glass_inside_replicator.inside
       )
@@ -128,7 +143,9 @@ class Replicator
     return unless glass_inside_replicator
 
     # Draw power if possible and then mix ingredients around.
+    # binding.pry
     if @power && @enterprise.reactor.draw_power(3)
+      # binding.pry
       glass_inside_replicator.inside.contents.shuffle!.compact!
     end
   end
