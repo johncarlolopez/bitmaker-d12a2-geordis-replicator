@@ -1,3 +1,4 @@
+require "pry"
 class Replicator
 
   # When the Enterprise calls Replicator.new, this method executes.
@@ -31,6 +32,7 @@ class Replicator
     # including the number 0, empty arrays, and anything else (strings, classes, instances, etc.).
     # This should report back a "truthy" for the power to work.
     @power = @enterprise.reactor.on
+    # binding.pry
   end
 
   # After the Enterprise is put together, this is the
@@ -50,7 +52,7 @@ class Replicator
     # transported and @inside_replicator will contain the glass
     # in its contents.
     retrieve_glass
-
+    # binding.pry
     # Setup an instance variable to access the glass.
     @glass = @inside_replicator.contents.first
 
@@ -84,6 +86,7 @@ class Replicator
     # and now @plate.contents should contain the glass at
     # the proper temperature and with the proper ingredients.
     transport_glass_to_replicator_plate
+    # binding.pry
   end
 
   # This moves the glass from the cupboard to inside the replicator.
